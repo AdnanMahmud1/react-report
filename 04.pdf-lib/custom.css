@@ -1,0 +1,13 @@
+body {
+  font-family: Helvetica;
+}
+.header {
+  position: fixed;
+  top: 750px;
+  left: 50px;
+}
+.footer {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+}

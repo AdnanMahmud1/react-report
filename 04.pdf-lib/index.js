@@ -1,109 +1,96 @@
+const { PDFDocument, StandardFonts } = require("pdf-lib");
 const express = require("express");
-const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
-const fs = require("fs");
-const path = require("path");
-const fontKit = require ('@pdf-lib/fontkit')
 
 const app = express();
 
-// app.get("/generate-pdf", async (req, res) => {
-//   // Create a new PDF document
-//   const pdfDoc = await PDFDocument.create();
-//   const page = pdfDoc.addPage();
-
-//   // Set custom CSS styles
-//   const customCss = `
-//     <style>
-//       body {
-//         font-family: Helvetica;
-//       }
-
-//       .header {
-//         position: fixed;
-//         top: 750px;
-//         left: 50px;
-//       }
-
-//       .footer {
-//         position: fixed;
-//         bottom: 50px;
-//         left: 50px;
-//       }
-//     </style>
-//   `;
-
-//   // Add header
-//   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-//   const header = page.drawText("Header Text", {
-//     x: 50,
-//     y: 800,
-//     size: 20,
-//     font,
-//   });
-
-//   // Add footer
-//   const footer = page.drawText("Footer Text", { x: 50, y: 20, size: 10, font });
-
-//   // Add custom CSS to the document
-//   page.addHtml(customCss);
-
-//   // Serialize the PDF to a buffer
-//   const pdfBytes = await pdfDoc.save();
-
-//   // Set response headers for downloading the PDF
-//   res.setHeader("Content-Type", "application/pdf");
-//   res.setHeader("Content-Disposition", 'attachment; filename="generated.pdf"');
-
-//   // Send the PDF buffer as the response
-//   res.send(pdfBytes);
-// });
 app.get("/generate-pdf", async (req, res) => {
   // Create a new PDF document
   const pdfDoc = await PDFDocument.create();
 
-  // Load an existing font and embed it in the document
-   pdfDoc.registerFontkit(fontKit);
-  const fontBytes = fs.readFileSync("arial.ttf");
-  const font = await pdfDoc.embedFont(fontBytes);
+  // Set the font and font size for the header and footer
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontSize = 12;
+
+  // Custom CSS for styling the PDF
+  const customCSS = `
+    <style>
+      body {
+        font-family: 'Helvetica';
+        font-size: 14px;
+      }
+
+      header, footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        color: #333;
+      }
+
+      header {
+        top: 0;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background-color: #eee;
+      }
+
+      footer {
+        bottom: 0;
+        height: 30px;
+        line-height: 30px;
+        font-size: 10px;
+        text-align: center;
+        background-color: #eee;
+      }
+    </style>
+  `;
 
   // Add a new page to the document
   const page = pdfDoc.addPage();
 
-  // Set the header
-  const header = "My Custom Header";
-  page.drawText(header, {
-    x: 50,
+  // Add header to the page
+  const header = page.drawText("Header", {
+    x: 200,
     y: page.getHeight() - 50,
     font,
-    size: 18,
-    //color: rgb(0, 0, 0),
+    size: fontSize,
   });
 
-  // Set the footer
-  const footer = "Page Number: 1";
-  page.drawText(footer, { x: 50, y: 50, font, size: 12, color: rgb(0, 0, 0) });
+  // Add footer to the page
+  const footer = page.drawText("Footer", {
+    x: 200,
+    y: 20,
+    font,
+    size: fontSize,
+  });
 
-  // Add custom CSS
-  const css = fs.readFileSync("custom.css", "utf-8");
+  // Add content to the page
+  const content = page.drawText("This is the content of the page.", {
+    x: 50,
+    y: 400,
+    font,
+    size: fontSize,
+  });
 
-  // Set the CSS in the PDF metadata
-  pdfDoc.setTitle("My Custom PDF");
-  pdfDoc.setAuthor("Your Name");
-  pdfDoc.setSubject("PDF generation in Node.js");
-  pdfDoc.setKeywords(["PDF", "Node.js"]);
-  pdfDoc.setProducer("pdf-lib");
+  // Add multiple pages
+  for (let i = 0; i < 5; i++) {
+    const newPage = pdfDoc.addPage();
+    newPage.drawText(`Page ${i + 2}`, {
+      x: 200,
+      y: newPage.getHeight() - 50,
+      font,
+      size: fontSize,
+    });
+  }
 
-  // Generate the PDF bytes
+  // Get the PDF document as a base64 string
   const pdfBytes = await pdfDoc.save();
 
-  // Set the appropriate headers for the PDF response
+  // Set the response headers for downloading the PDF
+  res.setHeader("Content-Disposition", 'attachment; filename="generated.pdf"');
   res.setHeader("Content-Type", "application/pdf");
-  res.setHeader(
-    "Content-Disposition",
-    'attachment; filename="my-custom-pdf.pdf"'
-  );
 
-  // Send the PDF to the client
+  // Send the PDF as the response
   res.send(pdfBytes);
 });
 

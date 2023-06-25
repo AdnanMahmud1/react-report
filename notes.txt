@@ -6,3 +6,5 @@ links:
 5. https://blog.theodo.com/2021/10/pdf-generation-react-puppeteer/
 6. https://blog.theodo.com/2023/05/react-native-single-codebase/
 7. https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/
+8. https://stackoverflow.com/questions/73543912/attempted-import-error-create-is-not-exported-from-fontkit-imported-as-fo
+9. https://www.youtube.com/watch?v=bSmUSLL2qKA

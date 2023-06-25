@@ -1,0 +1,8 @@
+links:
+1. https://www.ultimateakash.com/blog-details/IixTQGAKYAo=/How-to-Generate-PDF-in-Node.js-2023
+2. https://github.com/ultimateakash/node-pdf/tree/master
+3. https://www.youtube.com/watch?v=rvp94BWcEl0
+4. https://codingshiksha.com/page/2/
+5. https://blog.theodo.com/2021/10/pdf-generation-react-puppeteer/
+6. https://blog.theodo.com/2023/05/react-native-single-codebase/
+7. https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/

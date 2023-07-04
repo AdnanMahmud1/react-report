@@ -8,3 +8,7 @@ links:
 7. https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/
 8. https://stackoverflow.com/questions/73543912/attempted-import-error-create-is-not-exported-from-fontkit-imported-as-fo
 9. https://www.youtube.com/watch?v=bSmUSLL2qKA
+
+
+
+Working example 06,

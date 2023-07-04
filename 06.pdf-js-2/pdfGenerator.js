@@ -18,13 +18,18 @@ app.get("/generate-pdf", async (req, res) => {
 
   // Add some text to the page
   page.drawText("Hello, World!", { x: 50, y: 500, color: rgb(0, 0.53, 0.71) });
-
+  page.drawText(`${0 + 1}`, {
+    x: page.getWidth() / 2,
+    y: page.getHeight() - 20,
+    font: font,
+    size: 12,
+  });
   // Serialize the PDF document
   const pdfBytes = await pdfDoc.save();
 
   // Set the response headers
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", 'attachment; filename="example.pdf"');
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", 'attachment; filename="example.pdf"');
 
   //res.setHeader("Content-Type", "application/pdf");
   //res.setHeader("Content-Disposition", 'inline; filename="example.pdf"');

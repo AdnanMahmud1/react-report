@@ -1,9 +1,6 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const pdf = require("html-pdf");
 const cors = require("cors");
-
-const pdfTemplate = require("./documents");
+const { default: getPdf } = require("./report1");
 
 const app = express();
 
@@ -15,12 +12,13 @@ app.use(bodyParser.json());
 
 //Post -route
 app.post("/create-pdf", (req, res) => {
-  pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
-    if (err) {
-      res.send(Promise.reject());
-    }
-    res.send(Promise.resolve());
-  });
+  getPdf();
+  // pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+  //   if (err) {
+  //     res.send(Promise.reject());
+  //   }
+  //   res.send(Promise.resolve());
+  // });
 });
 
 //Get requets

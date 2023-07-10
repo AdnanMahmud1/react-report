@@ -39,8 +39,6 @@ app.get("/generate-pdf", async (req, res) => {
       "./pdfTemplate.html",
       "utf-8"
     );
-    const tableData =;
-    const modifiedHtml = htmlContent.replace("tabledata", tableData);
     // Set the page content and wait for network idle
     await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 

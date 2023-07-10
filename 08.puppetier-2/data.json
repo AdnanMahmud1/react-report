@@ -1,0 +1,17 @@
+{
+  "title": "Pdf Document in Puppeteer & handlebar",
+  "users": [
+    {
+      "name": "A",
+      "age": "20"
+    },
+    {
+      "name": "A",
+      "age": "20"
+    },
+    {
+      "name": "A",
+      "age": "20"
+    }
+  ]
+}

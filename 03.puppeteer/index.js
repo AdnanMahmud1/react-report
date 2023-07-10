@@ -1,36 +1,46 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
+const fs = require("fs");
+const { personListShort, personListLong } = require("./peronList");
 
 const app = express();
 const port = 3000;
 
 app.get("/generate-pdf", async (req, res) => {
   try {
+    const datalist = personListShort;
+    console.log(datalist);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     // Generate your HTML content
-    const htmlContent = `
-      <html>
-        <head>
-          <style>
-            /* Your custom CSS styles here */
-          </style>
-        </head>
-        <body>
-          <header>
-            <!-- Header content here -->
-          </header>
-          <main>
-           <h1>Hello from puppetier</h1>
-          </main>
-          <footer>
-            <!-- Footer content here -->
-          </footer>
-        </body>
-      </html>
-    `;
-
+    // const htmlContent = `
+    //   <html>
+    //     <head>
+    //       <style>
+    //         /* Your custom CSS styles here */
+    //       </style>
+    //     </head>
+    //     <body>
+    //       <header>
+    //         <!-- Header content here -->
+    //       </header>
+    //       <main>
+    //        <h1>Hello from puppetier</h1>
+    //       </main>
+    //       <footer>
+    //         <!-- Footer content here -->
+    //       </footer>
+    //     </body>
+    //   </html>
+    // `;
+    //const htmlContent = fs.readFileSync("./pdfTemplate.html", "utf-8");
+    const htmlContent = await fs.promises.readFile(
+      "./pdfTemplate.html",
+      "utf-8"
+    );
+    const tableData =;
+    const modifiedHtml = htmlContent.replace("tabledata", tableData);
     // Set the page content and wait for network idle
     await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 

@@ -5,8 +5,9 @@ const report = require("./reportMake");
 const path = require("path");
 const { personListLong, personListShort } = require("./peronList");
 
-//app.use("/images", express.static(path.join(__dirname, "/public/images")));
+//app.use("/images", express.static(path.join(__dirname, "./public/images")));
 app.use(express.static("./public"));
+//app.use(express.static("public/images"));
 
 app.get("/pdf", async (req, res) => {
   try {
@@ -23,6 +24,9 @@ app.get("/pdf", async (req, res) => {
     console.error("Error generating PDF:", error);
     res.status(500).send("Error generating PDF");
   }
+});
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./public", "header.html"));
 });
 
 app.listen(port, () => {

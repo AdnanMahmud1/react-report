@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My HTML Template</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* @media print {
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        } */
+        @media print {
+            table {
+                page-break-after: auto
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            td {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            thead {
+                display: table-header-group
+            }
+
+            tfoot {
+                display: table-footer-group
+            }
+        }
+
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        div {
+            page-break-inside: avoid;
+        }
+
+        /* This is the key */
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+
+        /* .page {
+            page-break-after: always;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="container">
+            <h1 style="padding-top: 100px;">
+                <div class="jumbotron text-center">
+                    <img src="header-image.jpg" class="img-fluid" alt="Header Image">
+                    <h1 class="display-4">Sample Report Card</h1>
+                </div>
+            </h1>
+            <table class="table table-bordered" style="font-size: 17px">
+                <table-placeholder></table-placeholder>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+
+
+</html>

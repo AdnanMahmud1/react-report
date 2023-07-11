@@ -14,7 +14,7 @@ const currentDate = new Date().toLocaleDateString();
    fs.readFileSync(path.join(__dirname, "public/header.html"), "utf-8")
  );
    const mainTemplate = hbs.compile(
-     fs.readFileSync(path.join(__dirname, "public/body.html"), "utf-8")
+     fs.readFileSync(path.join(__dirname, "public/bodyTest.html"), "utf-8")
    );
 
 const headerTemp =
@@ -74,6 +74,7 @@ const makeReport = async (reportData) => {
     const mainHtml = mainTemplate(printObj);
 
     const html = headerHtml + mainHtml;
+    //const html = mainHtml;
 
     //const content = await processHtml("index", printObj);
 
@@ -86,7 +87,7 @@ const makeReport = async (reportData) => {
       landscape: false,
       margin: { top: "3cm", bottom: "2cm" },
       displayHeaderFooter: true,
-      headerTemplate: riseHeader,
+      //headerTemplate: headerTempDynamic,
       footerTemplate: footerTemp,
     };
     const landscapeConfiguration = {

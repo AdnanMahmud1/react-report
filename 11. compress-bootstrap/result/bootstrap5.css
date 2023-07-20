@@ -197,7 +197,8 @@ tr {
   font: inherit;
   -webkit-appearance: button;
 }
-.container {
+.container,
+.container-fluid {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 100%;
@@ -247,6 +248,10 @@ tr {
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
+}
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
 }
 @media (min-width: 768px) {
   .col-md-4 {
@@ -326,6 +331,9 @@ tr {
 .border-bottom {
   border-bottom: var(--bs-border-width) var(--bs-border-style)
     var(--bs-border-color) !important;
+}
+.justify-content-center {
+  justify-content: center !important;
 }
 .text-center {
   text-align: center !important;

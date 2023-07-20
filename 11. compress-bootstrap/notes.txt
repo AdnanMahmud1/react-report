@@ -1,0 +1,4 @@
+1. install
+    npm i purgecss -g
+2. run
+    purgecss --css bootstrap5.css --content *.html --output result
